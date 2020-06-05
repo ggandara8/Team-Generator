@@ -6,19 +6,24 @@ class Employee {
         this.email = email;
     }
 
-    getName(name){
-        
+    getName(){
+       let EmployeeName = this.name;
+       return EmployeeName; 
     }
 
-    getId(id){
-
+    getId(){
+        let EmployeeId = this.id;
+        return EmployeeId;
     }
 
-    getEmail(email){
-
+    getEmail(){
+        let EmployeeEmail = this.email;
+        return EmployeeEmail;
     }
 
     getRole(){
-        
+        return "Employee";
     }
 }
+
+module.exports = Employee;
