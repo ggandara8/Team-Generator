@@ -9,8 +9,7 @@ const OUTPUT_DIR = path.resolve(__dirname, "output")
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 
-function ManagerPrompt(){
-    inquirer.prompt([
+inquirer.prompt([
     {
         type: "input",
         name: "name",
@@ -37,5 +36,97 @@ function ManagerPrompt(){
         message: "Which type of team member would you like to add? ",
         choices: ["Engineer", "Intern", "I don't want to add any more team members."]
     }
-    ]);
-}
+]).then(function({name, id, email, number, employee}){
+    const manager = new Manager(name, id, email, number);
+    // console.log(manager);
+    function EngineerPrompt(){
+        inquirer.prompt([
+            {
+                type: "input",
+                name: "name",
+                message: "What is your engineer's name? "  
+            },
+            {
+                type: "input",
+                name: "id",
+                message: "What is your engineer's id? "
+            },
+            {
+                type: "input",
+                name: "email",
+                message: "What is your engineer's email? "
+            },
+            {
+                type: "input",
+                name: "github",
+                message: "What is your engineer's github? "
+            },
+            {
+                type: "list",
+                name: "employee",
+                message: "Which type of team member would you like to add? ",
+                choices: ["Engineer", "Intern", "I don't want to add any more team members."]
+            }
+        ]).then(function({name, id, email, github, employee}){
+            if(employee === "Engineer"){
+                EngineerPrompt();
+            }
+            if(employee === "Intern"){
+                InternPrompt();
+            }
+            if(employee === "I don't want to add any more team members."){
+                // Render team.html
+            }
+        });
+        }
+        function InternPrompt(){
+            inquirer.prompt([
+                {
+                    type: "input",
+                    name: "name",
+                    message: "What is your intern's name? "  
+                },
+                {
+                    type: "input",
+                    name: "id",
+                    message: "What is your intern's id? "
+                },
+                {
+                    type: "input",
+                    name: "email",
+                    message: "What is your intern's email? "
+                },
+                {
+                    type: "input",
+                    name: "school",
+                    message: "What is your intern's school? "
+                },
+                {
+                    type: "list",
+                    name: "employee",
+                    message: "Which type of team member would you like to add? ",
+                    choices: ["Engineer", "Intern", "I don't want to add any more team members."]
+                }
+            ]).then(function({name, id, email, school, employee}){
+                if(employee === "Engineer"){
+                    EngineerPrompt();
+                }
+                if(employee === "Intern"){
+                    InternPrompt();
+                }
+                if(employee === "I don't want to add any more team members."){
+                    // Render team.html
+                }
+            });
+        }
+
+    if(employee === "Engineer"){
+        EngineerPrompt();
+    }
+    if(employee === "Intern"){
+        InternPrompt();
+    }
+    if(employee === "I don't want to add any more team members."){
+        // Render team.html
+    }
+});
