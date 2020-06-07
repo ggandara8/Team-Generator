@@ -9,10 +9,33 @@ const OUTPUT_DIR = path.resolve(__dirname, "output")
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 
-inquirer.prompt([
+function ManagerPrompt(){
+    inquirer.prompt([
     {
         type: "input",
         name: "name",
-        message: "Please enter your name: "
+        message: "What is your manager's name? "
+    },
+    {
+        type: "input",
+        name: "id",
+        message: "What is your manager's id? "
+    },
+    {
+        type: "input",
+        name: "email",
+        message: "What is your manager's email? "
+    },
+    {
+        type: "input",
+        name: "number",
+        message: "What is your manager's office number? "
+    },
+    {
+        type: "list",
+        name: "employee",
+        message: "Which type of team member would you like to add? ",
+        choices: ["Engineer", "Intern", "I don't want to add any more team members."]
     }
-]);
+    ]);
+}
